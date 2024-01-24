@@ -1,0 +1,17 @@
+on: push
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/setup-python@v5
+      with:
+        python-version: '3.9'
+    - run: |
+        python << EOF
+        from socket import EAI_NONAME, gaierror, gethostbyaddr, gethostbyname
+        ip = "123.125.71.48"
+        print(gethostbyaddr(ip))
+        hostname = gethostbyaddr(ip)[0]
+        final_ip = gethostbyname(hostname)
+        print(final_ip)
+        EOF
